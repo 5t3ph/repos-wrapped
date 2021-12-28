@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+}
+
+:root {
+  --green-light: hsl(135, 65%, 75%);
+  --green-medium: hsl(135, 65%, 40%);
+  --green-dark: hsl(135, 65%, 30%);
+  --color-light: hsl(135, 85%, 98%);
+}
+
+body {
+  background-color: hsl(135, 85%, 3%);
+  color: var(--color-light);
+  font-family: system-ui, sans-serif;
+  font-size: 1.35rem;
+}
+
+.container {
+  width: min(var(--container-max, 60ch), 100vw - 2rem);
+  margin: 5vh auto;
+}
+
+header p {
+  font-size: 1.5rem;
+  margin-top: 1em;
+}
+
+h1 {
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 8vw + 1rem, 6rem);
+  line-height: 1;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--green-light) 0 0.45em,
+    var(--green-medium) 0.45em 0.7em,
+    var(--green-dark) 0.7em 1.15em
+  );
+  filter: drop-shadow(0 0.015em var(--color-light));
+}
