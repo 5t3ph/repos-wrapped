@@ -8,7 +8,6 @@ permalink:
 
 {%- set user = eleventy.serverless.path.user -%}
 {%- set year = eleventy.serverless.path.year or '2021' -%}
-{# {% set repoData = github %} #}
 
 <header class="container">
   <h1>repos wrapped <small>{{ user }} // {{ year }}</small></h1>
@@ -16,7 +15,11 @@ permalink:
   <p><a href="/">Get your stats</a></p>
 </header>
 
+
 <main class="container">
+
+{% if repoData.length %}
+
   <dl class="grid">
     <div class="card">
       <dt>Total repos for {{ year }}</dt>
@@ -51,4 +54,7 @@ permalink:
   </li>
   {% endfor %}
   </ol>
+{% else %}
+<p>Sorry, we've either hit the API limit for now or you do not have any public repos for {{ year }}.</p>
+{% endif %}
 </main>

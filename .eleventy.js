@@ -15,7 +15,7 @@ module.exports = function (eleventyConfig) {
       return b.stargazers_count - a.stargazers_count;
     })[0];
 
-    return `<a href="${repo.html_url}">${repo.name}</a>`;
+    return `⭐️ ${repo.stargazers_count}<br><a href="${repo.html_url}">${repo.name}</a>`;
   });
 
   eleventyConfig.addFilter("lastUpdated", (repos) => {
