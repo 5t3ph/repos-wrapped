@@ -7,7 +7,7 @@ require("./eleventy-bundler-modules.js");
 
 async function handler(event) {
   let pathSplit = event.path.split("/").filter((entry) => !!entry);
-  let [user, year] = pathSplit;
+  let [_base, user, year] = pathSplit;
 
   year = year || new Date().getFullYear();
 

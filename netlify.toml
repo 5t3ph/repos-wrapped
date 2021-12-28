@@ -2,7 +2,7 @@
 command = "npm start"
 
 [[redirects]]
-from = "/:user/:year?/"
+from = "/stats/:user/:year?/"
 to = "/.netlify/functions/stats"
 status = 200
 force = true
