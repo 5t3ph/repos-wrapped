@@ -24,6 +24,14 @@ body {
   &.home {
     display: grid;
     place-content: center;
+
+    main {
+      margin-top: 0;
+    }
+
+    main * + * {
+      margin-top: 1em;
+    }
   }
 }
 
@@ -57,7 +65,7 @@ header {
 }
 
 header p:first-of-type {
-  font-size: 1.75rem;
+  font-size: clamp(1.35rem, 3vw + 1rem, 1.75rem);
   margin-top: 1em;
   color: var(--green-medium);
 }

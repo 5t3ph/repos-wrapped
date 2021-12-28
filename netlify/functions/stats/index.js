@@ -6,13 +6,19 @@ const { EleventyServerless } = require("@11ty/eleventy");
 require("./eleventy-bundler-modules.js");
 
 async function handler(event) {
+  const { GITHUB_TOKEN } = process.env;
   let pathSplit = event.path.split("/").filter((entry) => !!entry);
   let [_base, user, year] = pathSplit;
 
   year = year || new Date().getFullYear();
 
   const repoData = await fetch(
-    `https://api.github.com/users/${user}/repos?sort=created`
+    `https://api.github.com/users/${user}/repos?sort=created`,
+    {
+      headers: {
+        authorization: `token ${GITHUB_TOKEN}`,
+      },
+    }
   )
     .then((response) => response.json())
     .then((data) => {
