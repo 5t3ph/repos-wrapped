@@ -1,0 +1,9 @@
+[dev]
+command = "npm start"
+
+[[redirects]]
+from = "/:user/:year?/"
+to = "/.netlify/functions/stats"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "stats"

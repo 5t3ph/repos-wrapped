@@ -1,0 +1,52 @@
+---
+layout: base
+permalink:
+  stats: /:user/:year?/
+---
+
+{%- set user = eleventy.serverless.path.user -%}
+{%- set year = eleventy.serverless.path.year or '2021' -%}
+{# {% set repoData = github %} #}
+
+<header class="container">
+  <h1>repos wrapped <small>{{ user }} // {{ year }}</small></h1>
+  <p>A yearly review of your public GitHub repository stats</p>
+  <p><a href="/">Get your stats</a></p>
+</header>
+
+<main class="container">
+  <dl class="grid">
+    <div class="card">
+      <dt>Total repos for {{ year }}</dt>
+      <dd>{{ repoData | length }}</dd>
+    </div>
+    <div class="card">
+      <dt>Most starred</dt>
+      <dd>{% mostStarred repoData %}</dd>
+    </div>
+    <div class="card">
+      <dt>Last updated</dt>
+      <dd>{{ repoData | lastUpdated | repoDate }}</dd>
+    </div>
+  </dl>
+
+  <h2>All Repositories</h2>
+  <ol class="grid" role="list">
+  {% for repo in repoData %}
+  <li class="card">
+    <h3><a href="{{ repo.html_url }}">{{ repo.name }}</a></h3>
+    {%- if repo.description %}
+    <p>{{ repo.description }}</p>
+    {% endif -%}
+    <dl>
+      <dt>Stars</dt>
+      <dd>{{ repo.stargazers_count }}</dd>
+      <dt>Created</dt>
+      <dd>{{ repo.created_at | repoDate }}</dd>
+      <dt>Updated</dt>
+      <dd>{{ repo.updated_at | repoDate }}</dd>
+    </dl>
+  </li>
+  {% endfor %}
+  </ol>
+</main>

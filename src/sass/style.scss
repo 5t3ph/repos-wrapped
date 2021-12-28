@@ -7,13 +7,29 @@
   --green-medium: hsl(135, 65%, 40%);
   --green-dark: hsl(135, 65%, 30%);
   --color-light: hsl(135, 85%, 98%);
+  --color-dark: hsl(135, 85%, 3%);
+}
+
+html {
+  height: 100%;
 }
 
 body {
-  background-color: hsl(135, 85%, 3%);
+  background-color: var(--color-dark);
   color: var(--color-light);
   font-family: system-ui, sans-serif;
-  font-size: 1.35rem;
+  font-size: 1.25rem;
+  min-height: 100%;
+
+  &.home {
+    display: grid;
+    place-content: center;
+  }
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.08em;
 }
 
 .container {
@@ -21,9 +37,29 @@ body {
   margin: 5vh auto;
 }
 
-header p {
-  font-size: 1.5rem;
+header {
+  display: grid;
+
+  &::before {
+    content: "";
+    font-size: clamp(3rem, 8vw + 1rem, 6rem);
+    width: 1.25em;
+    height: 0.25em;
+    background-image: linear-gradient(
+      to right,
+      var(--green-light) 0 0.25em,
+      hsla(0 0% 0% / 0%) 0.25em 0.5em,
+      var(--green-medium) 0.5em 0.75em,
+      hsla(0 0% 0% / 0%) 0.75em 1em,
+      var(--green-dark) 1em 1.25em
+    );
+  }
+}
+
+header p:first-of-type {
+  font-size: 1.75rem;
   margin-top: 1em;
+  color: var(--green-medium);
 }
 
 h1 {
@@ -40,4 +76,78 @@ h1 {
     var(--green-dark) 0.7em 1.15em
   );
   filter: drop-shadow(0 0.015em var(--color-light));
+
+  small {
+    display: block;
+    line-height: 1.5;
+    font-size: 0.7em;
+  }
+}
+
+h2 {
+  margin: 8vh 0 3vh;
+}
+
+p {
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+code {
+  color: var(--green-light);
+  font-size: 0.9em;
+  overflow-wrap: break-word;
+}
+
+[role="list"] {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.card {
+  border-radius: 0.5rem;
+  border: 2px solid var(--green-light);
+  padding: 1rem;
+
+  * + * {
+    margin-top: 1em;
+  }
+}
+
+dt {
+  font-weight: bold;
+}
+
+dl .card {
+  background-color: var(--green-medium);
+  color: var(--color-dark);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+
+  dd {
+    padding-top: 1em;
+    margin-top: auto;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--min, 15ch), 1fr));
+  gap: 2rem;
+}
+
+ol.grid {
+  --min: 25ch;
+}
+
+ol {
+  a {
+    color: var(--green-light);
+  }
+
+  .card dd {
+    margin: 0.25em 0 1rem 1rem;
+  }
 }
