@@ -1,7 +1,9 @@
 ---
 layout: base
 permalink:
-  stats: /stats/:user/:year?/
+  stats: 
+  - /stats/:user/
+  - /stats/:user/:year/
 ---
 
 {%- set user = eleventy.serverless.path.user -%}
