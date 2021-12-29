@@ -4,6 +4,8 @@ permalink:
   stats: 
   - /stats/:user/
   - /stats/:user/:year/
+  - /stats/:user
+  - /stats/:user/:year
 eleventyComputed:
   title: "{{ eleventy.serverless.path.user or '' }} {{ eleventy.serverless.path.year or '2021' }}"
   user: "{{ eleventy.serverless.path.user or '' }}"

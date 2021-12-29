@@ -9,7 +9,21 @@ force = true
 _generated_by_eleventy_serverless = "stats"
 
 [[redirects]]
+from = "/stats/:user/:year"
+to = "/.netlify/functions/stats"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "stats"
+
+[[redirects]]
 from = "/stats/:user/"
+to = "/.netlify/functions/stats"
+status = 200
+force = true
+_generated_by_eleventy_serverless = "stats"
+
+[[redirects]]
+from = "/stats/:user"
 to = "/.netlify/functions/stats"
 status = 200
 force = true
