@@ -27,10 +27,10 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addShortcode("lastUpdated", (repos) => {
     const originalRepos = [...repos];
     const repo = originalRepos.sort((a, b) => {
-      return new Date(a.updated_at) - new Date(b.updated_at);
+      return DateTime.fromISO(b.pushed_at) - DateTime.fromISO(a.pushed_at);
     })[0];
 
-    return `${dateFormat(repo.updated_at)}<br><a href="${repo.html_url}">${
+    return `${dateFormat(repo.pushed_at)}<br><a href="${repo.html_url}">${
       repo.name
     }</a>`;
   });

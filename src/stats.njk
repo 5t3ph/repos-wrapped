@@ -51,7 +51,7 @@ eleventyComputed:
       <dt>Created</dt>
       <dd>{{ repo.created_at | repoDate }}</dd>
       <dt>Updated</dt>
-      <dd>{{ repo.updated_at | repoDate }}</dd>
+      <dd>{{ repo.pushed_at | repoDate }}</dd>
     </dl>
   </li>
   {% endfor %}
