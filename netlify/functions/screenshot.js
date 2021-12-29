@@ -56,11 +56,11 @@ async function screenshot(user, year, total, stars, starsrepo) {
     if (total) {
       totalEl.innerHTML = total;
     }
-    if (stars) {
+    if (stars && stars > 0) {
       starsEl.innerHTML = stars;
-    }
-    if (starsrepo) {
       starsrepoEl.innerHTML = starsrepo;
+    } else {
+      document.querySelector(".starred").remove();
     }
   }, pageData);
 

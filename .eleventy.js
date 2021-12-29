@@ -28,9 +28,13 @@ module.exports = function (eleventyConfig) {
     const originalRepos = [...repos];
     const repo = originalRepos.sort((a, b) => {
       return b.stargazers_count - a.stargazers_count;
-    })[0];
+    });
 
-    return `${repo.stargazers_count}/${repo.name}`;
+    if (repo[0]) {
+      return `${repo[0].stargazers_count}/${repo[0].name}`;
+    } else {
+      return `0/0`;
+    }
   });
 
   eleventyConfig.addShortcode("lastUpdated", (repos) => {
