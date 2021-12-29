@@ -25,7 +25,8 @@ body {
     display: grid;
     place-content: center;
 
-    main {
+    main,
+    footer {
       margin-top: 0;
     }
 
@@ -37,7 +38,13 @@ body {
 
 a {
   color: inherit;
-  text-underline-offset: 0.08em;
+  text-underline-offset: 0.15em;
+  overflow-wrap: break-word;
+
+  &:focus-visible {
+    outline-offset: 0.15em;
+    outline: 2px solid currentColor;
+  }
 }
 
 .container {
@@ -70,6 +77,12 @@ header p:first-of-type {
   color: var(--green-medium);
 }
 
+footer {
+  padding-top: 1rem;
+  color: var(--green-light);
+  border-top: 1px solid;
+}
+
 h1 {
   font-family: "Inter", system-ui, sans-serif;
   font-weight: 900;
@@ -87,7 +100,7 @@ h1 {
 
   small {
     display: block;
-    line-height: 1.5;
+    line-height: 1.25;
     font-size: 0.7em;
   }
 }
@@ -137,6 +150,11 @@ dl .card {
   dd {
     padding-top: 1em;
     margin-top: auto;
+  }
+
+  .total {
+    font-size: 2rem;
+    font-weight: bold;
   }
 }
 

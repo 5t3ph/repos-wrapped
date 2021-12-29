@@ -1,16 +1,39 @@
+{%- set pageTitle %}{% if title and page.url != '/' %}{{ title }} | {% endif %}{{ meta.siteName }}{% endset -%}
+{%- set pageDescription %}{% if description %}{{ description }}{% else %}{{ meta.description }}{% endif %}{% endset -%}
+{%- set pageSocialImg %}{{ meta.url }}/img/reposwrapped.png{% endset -%}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Repos Wrapped</title>
+  <title>{{ pageTitle | safe }}</title>
+	<meta name="description" content="{{ pageDescription }}" />
   <link rel="stylesheet" href="{{ '/css/style.css' | url }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap&text=reposapd" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
+  {% if 'reposwrapped.dev' in meta.url %}
+		<link rel="preconnect" href="https://plausible.io">
+    <link rel="dns-prefetch" href="https://plausible.io">
+    <script async defer data-domain="reposwrapped.dev" src="https://plausible.io/js/plausible.js"></script>
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }</script>
+  {% endif %}
+	<meta name="twitter:card" content="summary_large_image" />
+	{% if meta.twitterUsername %}
+	<meta name="twitter:creator" content="@{{ meta.twitterUsername }}" />
+	{% endif %}
+	<meta name="twitter:title" content="{{pageTitle}}" />
+	<meta name="twitter:description" content="{{pageDescription}}" />
+	<meta name="og:title" content="{{pageTitle}}" />
+	<meta name="og:description" content="{{pageDescription}}" />
+	<meta property="og:image" content="{{pageSocialImg}}" />
+	<meta name="twitter:image" content="{{pageSocialImg}}" />
 </head>
 <body class="{{ 'home' if page.url == '/' else 'stats' }}">
   {{ content | safe }}
+
+  <footer class="container"><p><small>From the lab of <a href="https://twitter.com/5t3ph">Stephanie Eckles</a></small></p></footer>
 </body>
 </html>

@@ -1,8 +1,14 @@
 const { DateTime } = require("luxon");
 const { EleventyServerlessBundlerPlugin } = require("@11ty/eleventy");
 
+const dateFormat = (date) => {
+  const d = DateTime.fromISO(date);
+  return d.toFormat("LLL d, yyyy");
+};
+
 module.exports = function (eleventyConfig) {
   eleventyConfig.addWatchTarget("./src/sass/");
+  eleventyConfig.addPassthroughCopy("./src/img/");
 
   eleventyConfig.addPlugin(EleventyServerlessBundlerPlugin, {
     name: "stats",
@@ -18,15 +24,19 @@ module.exports = function (eleventyConfig) {
     return `⭐️ ${repo.stargazers_count}<br><a href="${repo.html_url}">${repo.name}</a>`;
   });
 
-  eleventyConfig.addFilter("lastUpdated", (repos) => {
-    return repos.sort((a, b) => {
-      new Date(a.updated_at) - new Date(b.updated_at);
-    })[0].updated_at;
+  eleventyConfig.addShortcode("lastUpdated", (repos) => {
+    const originalRepos = [...repos];
+    const repo = originalRepos.sort((a, b) => {
+      return new Date(a.updated_at) - new Date(b.updated_at);
+    })[0];
+
+    return `${dateFormat(repo.updated_at)}<br><a href="${repo.html_url}">${
+      repo.name
+    }</a>`;
   });
 
   eleventyConfig.addFilter("repoDate", (date) => {
-    const d = DateTime.fromISO(date);
-    return d.toFormat("LLL d, yyyy");
+    return dateFormat(date);
   });
 
   return {

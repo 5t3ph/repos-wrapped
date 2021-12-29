@@ -4,13 +4,15 @@ permalink:
   stats: 
   - /stats/:user/
   - /stats/:user/:year/
+eleventyComputed:
+  title: "{{ eleventy.serverless.path.user or '' }} {{ eleventy.serverless.path.year or '2021' }}"
 ---
 
 {%- set user = eleventy.serverless.path.user -%}
 {%- set year = eleventy.serverless.path.year or '2021' -%}
 
 <header class="container">
-  <h1>repos wrapped <small>{{ user }} // {{ year }}</small></h1>
+  <h1>repos wrapped <small>{{ user }}<br>{{ year }}</small></h1>
   <p>A yearly review of your public GitHub repository stats</p>
   <p><a href="/">Get your stats</a></p>
 </header>
@@ -22,8 +24,8 @@ permalink:
 
   <dl class="grid">
     <div class="card">
-      <dt>Total repos for {{ year }}</dt>
-      <dd>{{ repoData | length }}</dd>
+      <dt>Total repos</dt>
+      <dd class="total">{{ repoData | length }}</dd>
     </div>
     <div class="card">
       <dt>Most starred</dt>
@@ -31,7 +33,7 @@ permalink:
     </div>
     <div class="card">
       <dt>Last updated</dt>
-      <dd>{{ repoData | lastUpdated | repoDate }}</dd>
+      <dd>{% lastUpdated repoData %}</dd>
     </div>
   </dl>
 
