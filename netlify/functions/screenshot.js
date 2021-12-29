@@ -2,7 +2,7 @@ require("dotenv").config();
 const { builder } = require("@netlify/functions");
 const chromium = require("chrome-aws-lambda");
 
-async function screenshot(user, year, total, stars) {
+async function screenshot(user, year, total, stars, starsrepo) {
   const baseURL = process.env.URL;
   const url = `${baseURL}/social-template/`;
   let options = {
@@ -15,6 +15,7 @@ async function screenshot(user, year, total, stars) {
     year: decodeURIComponent(year),
     total: decodeURIComponent(total),
     stars: decodeURIComponent(stars),
+    starsrepo: decodeURIComponent(starsrepo),
   };
 
   const browser = await chromium.puppeteer.launch({
@@ -39,11 +40,12 @@ async function screenshot(user, year, total, stars) {
     deviceScaleFactor: 2,
   });
 
-  await page.evaluate(({ user, year, total, stars }) => {
+  await page.evaluate(({ user, year, total, stars, starsrepo }) => {
     const userEl = document.querySelector(".user");
     const yearEl = document.querySelector(".year");
     const totalEl = document.querySelector(".total");
-    const starsEl = document.querySelector(".starred");
+    const starsEl = document.querySelector(".stars");
+    const starsrepoEl = document.querySelector(".starsrepo");
 
     if (user) {
       userEl.innerHTML = user;
@@ -57,6 +59,9 @@ async function screenshot(user, year, total, stars) {
     if (stars) {
       starsEl.innerHTML = stars;
     }
+    if (starsrepo) {
+      starsrepoEl.innerHTML = starsrepo;
+    }
   }, pageData);
 
   let output = await page.screenshot(options);
@@ -68,10 +73,10 @@ async function screenshot(user, year, total, stars) {
 
 async function handler(event, _context) {
   let pathSplit = event.path.split("/").filter((entry) => !!entry);
-  let [_base, user, year, total, stars] = pathSplit;
+  let [_base, user, year, total, stars, starsrepo] = pathSplit;
 
   try {
-    let output = await screenshot(user, year, total, stars);
+    let output = await screenshot(user, year, total, stars, starsrepo);
 
     return {
       statusCode: 200,

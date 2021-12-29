@@ -30,7 +30,7 @@ module.exports = function (eleventyConfig) {
       return b.stargazers_count - a.stargazers_count;
     })[0];
 
-    return `<span>⭐️ ${repo.stargazers_count}</span><span>${repo.name}</span>`;
+    return `${repo.stargazers_count}/${repo.name}`;
   });
 
   eleventyConfig.addShortcode("lastUpdated", (repos) => {
