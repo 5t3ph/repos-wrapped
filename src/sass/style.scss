@@ -158,6 +158,38 @@ dl .card {
   }
 }
 
+.og {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 0.5rem;
+
+  dl {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  dl .card {
+    padding: 0.5em;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    border-left: 2px solid var(--green-medium);
+    color: var(--color-light);
+    text-align: left;
+
+    dd {
+      padding-top: 0.25em;
+    }
+  }
+
+  p {
+    color: var(--green-light) !important;
+    font-weight: bold;
+    font-size: 1.15rem !important;
+    margin: 0 !important;
+  }
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(var(--min, 15ch), 1fr));

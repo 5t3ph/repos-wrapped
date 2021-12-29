@@ -6,6 +6,10 @@ permalink:
   - /stats/:user/:year/
 eleventyComputed:
   title: "{{ eleventy.serverless.path.user or '' }} {{ eleventy.serverless.path.year or '2021' }}"
+  user: "{{ eleventy.serverless.path.user or '' }}"
+  year: "{{ eleventy.serverless.path.year or '2021' }}"
+  total: "{% if repoData %}{{ repoData.length }}{% endif %}"
+  stars: "{% if repoData %}{% ogStars repoData %}{% endif %}"
 ---
 
 {%- set user = eleventy.serverless.path.user -%}

@@ -24,6 +24,15 @@ module.exports = function (eleventyConfig) {
     return `⭐️ ${repo.stargazers_count}<br><a href="${repo.html_url}">${repo.name}</a>`;
   });
 
+  eleventyConfig.addShortcode("ogStars", (repos) => {
+    const originalRepos = [...repos];
+    const repo = originalRepos.sort((a, b) => {
+      return b.stargazers_count - a.stargazers_count;
+    })[0];
+
+    return `⭐️ ${repo.stargazers_count}<br>${repo.name}`;
+  });
+
   eleventyConfig.addShortcode("lastUpdated", (repos) => {
     const originalRepos = [...repos];
     const repo = originalRepos.sort((a, b) => {

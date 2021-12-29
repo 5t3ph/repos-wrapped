@@ -14,3 +14,9 @@ to = "/.netlify/functions/stats"
 status = 200
 force = true
 _generated_by_eleventy_serverless = "stats"
+
+[[redirects]]
+from = "/social-img/:user/:year/:total/:stars"
+to = "/.netlify/functions/social-img"
+status = 200
+force = true
