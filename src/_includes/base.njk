@@ -1,7 +1,7 @@
 {%- set pageTitle %}{% if title and page.url != '/' %}{{ title }} | {% endif %}{{ meta.siteName }}{% endset -%}
 {%- set pageDescription %}{% if description %}{{ description }}{% else %}{{ meta.description }}{% endif %}{% endset -%}
 {%- set homeSocialImg %}{{ meta.url }}/img/reposwrapped.png{% endset -%}
-{%- set statsSocialImg -%}{{ meta.url }}/social-img/{{ user }}/{{ year }}/{{ total }}/{{ stars }}{% endset -%}
+{%- set statsSocialImg -%}{{ meta.url }}/social-img/{{ user | urlencode }}/{{ year | urlencode }}/{{ total | urlencode }}/{{ stars | urlencode }}{% endset -%}
 {%- set pageSocialImg = homeSocialImg if page.url == '/' else statsSocialImg -%}
 
 <!DOCTYPE html>

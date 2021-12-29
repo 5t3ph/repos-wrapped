@@ -179,6 +179,11 @@ dl .card {
 
     dd {
       padding-top: 0.25em;
+
+      span {
+        display: block;
+        margin: 0;
+      }
     }
   }
 

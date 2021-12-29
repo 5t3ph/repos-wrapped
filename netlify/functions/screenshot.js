@@ -6,8 +6,9 @@ async function screenshot(user, year, total, stars) {
   const baseURL = process.env.URL;
   const url = `${baseURL}/social-template/`;
   let options = {
-    type: "png",
+    type: "jpeg",
     encoding: "base64",
+    quality: 80,
   };
   let pageData = {
     user: decodeURIComponent(user),
@@ -26,7 +27,7 @@ async function screenshot(user, year, total, stars) {
   const page = await browser.newPage();
 
   await page.goto(url, {
-    waitUntil: ["load", "networkidle0"],
+    waitUntil: ["domcontentloaded"],
     timeout: 3000,
   });
 
@@ -75,7 +76,7 @@ async function handler(event, _context) {
     return {
       statusCode: 200,
       headers: {
-        "content-type": `image/png`,
+        "content-type": `image/jpeg`,
       },
       body: output,
       isBase64Encoded: true,
