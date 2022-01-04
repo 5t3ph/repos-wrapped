@@ -15,7 +15,12 @@ eleventyComputed:
 ---
 
 {%- set user = eleventy.serverless.path.user -%}
-{%- set year = eleventy.serverless.path.year or '2021' -%}
+{%- set year = eleventy.serverless.path.year -%}
+
+{% if user and not year %}
+<script>window.location = '{{ meta.url }}/stats/{{ user }}/2021/';</script>
+{% endif %}
+
 
 <header class="container">
   <h1>repos wrapped <small>{{ user }}<br>{{ year }}</small></h1>

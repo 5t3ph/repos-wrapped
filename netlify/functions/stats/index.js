@@ -10,8 +10,6 @@ async function handler(event) {
   let pathSplit = event.path.split("/").filter((entry) => !!entry);
   let [_base, user, year] = pathSplit;
 
-  year = year || new Date().getFullYear();
-
   const repoData = await fetch(
     `https://api.github.com/users/${user}/repos?sort=created`,
     {
