@@ -7,9 +7,9 @@ permalink:
   - /stats/:user
   - /stats/:user/:year
 eleventyComputed:
-  title: "{{ eleventy.serverless.path.user or '' }} {{ eleventy.serverless.path.year or '2021' }}"
+  title: "{{ eleventy.serverless.path.user or '' }} {{ eleventy.serverless.path.year or meta.currentYear }}"
   user: "{{ eleventy.serverless.path.user or '' }}"
-  year: "{{ eleventy.serverless.path.year or '2021' }}"
+  year: "{{ eleventy.serverless.path.year or meta.currentYear }}"
   total: "{% if repoData %}{{ repoData.length }}{% endif %}"
   stars: "{% if repoData %}{% ogStars repoData %}{% endif %}"
 ---
@@ -18,7 +18,7 @@ eleventyComputed:
 {%- set year = eleventy.serverless.path.year -%}
 
 {% if user and not year %}
-<script>window.location = '{{ meta.url }}/stats/{{ user }}/2021/';</script>
+<script>window.location = '{{ meta.url }}/stats/{{ user }}/{{ meta.currentYear }}/';</script>
 {% endif %}
 
 
